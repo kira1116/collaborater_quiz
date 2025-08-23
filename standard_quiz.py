@@ -51,7 +51,7 @@ PHYSICS = [
     {"q":"Transformer works on:", "choices":["A) DC","B) AC","C) Both","D) Neither"], "answer":"B","explain":"Transformers require changing magnetic flux (AC)."},
     {"q":"The slope of a velocity–time graph gives:", "choices":["A) Velocity","B) Displacement","C) Acceleration","D) Jerk"], "answer":"C","explain":"dv/dt = acceleration."},
 ]    
-
+#developd by hawlet
 MATH = [
     {"q":"Solve: 2x + 6 = 14. x = ?", "choices":["A) 3","B) 4","C) 5","D) 6"], "answer":"B","explain":"2x=8 → x=4."},
     {"q":"Area of a circle with r=3:", "choices":["A) 6π","B) 9π","C) 3π","D) 12π"], "answer":"B","explain":"A=πr^2=9π."},
@@ -74,7 +74,7 @@ MATH = [
     {"q":"GCD of 12 and 18:", "choices":["A) 2","B) 3","C) 6","D) 12"], "answer":"C","explain":"Common divisors → largest is 6."},
     {"q":"If a:b=2:3 and b:c=3:4, then a:c =", "choices":["A) 1:2","B) 2:4","C) 2:4.5","D) 2:4 (simplify 1:2)"], "answer":"A","explain":"a:b=2:3, b:c=3:4 → a:c=2:4=1:2."},
 ]
-
+#developd by hikma
 ENGLISH = [
     {"q":"Choose the correct form: She __ to school every day.", "choices":["A) go","B) goes","C) going","D) gone"], "answer":"B","explain":"3rd person singular takes -es."},
     {"q":"Pick the synonym of 'rapid':", "choices":["A) slow","B) quick","C) late","D) lazy"], "answer":"B","explain":"'Rapid' ≈ 'quick'."},
@@ -97,6 +97,8 @@ ENGLISH = [
     {"q":"Choose clearer sentence:", "choices":["A) Me and him are friends.","B) He and I are friends.","C) Him and me are friends.","D) I and he are friends."], "answer":"B","explain":"Subject pronouns: He and I."},
     {"q":"'Few' vs 'a few': 'a few' means:", "choices":["A) almost none","B) none","C) some (positive)","D) many"], "answer":"C","explain":"'A few' = some; 'few' = not many (negative)."},
 ]
+
+#develop by kira
 SAT = [
     {"q":"Math: If 5x+10=0, x=?", "choices":["A) -2","B) -5","C) 2","D) 5"], "answer":"A","explain":"5x=-10 → x=-2."},
     {"q":"Reading: In context, 'robust' most nearly means:", "choices":["A) fragile","B) strong","C) narrow","D) quiet"], "answer":"B","explain":"'Robust' = strong."},
@@ -119,3 +121,108 @@ SAT = [
     {"q":"Writing: Place comma: After dinner we went home.", "choices":["A) After dinner, we went home.","B) After, dinner we went home.","C) After dinner we, went home.","D) After dinner we went, home."], "answer":"A","explain":"Introductory phrase → comma."},
     {"q":"Math: If 3x+2=17, then x=?", "choices":["A) 3","B) 4","C) 5","D) 6"], "answer":"C","explain":"3x=15 → x=5."},
 ]
+
+QUESTION_BANK = {
+    "Chemistry": CHEMISTRY,
+    "Physics": PHYSICS,
+    "Math": MATH,
+    "English": ENGLISH,
+    "SAT": SAT,
+}
+#developed by group memeber
+# Sanity check counts:
+# 5 subjects × 20 each = 100
+assert all(len(v) == 20 for v in QUESTION_BANK.values())
+
+# ================== QUIZ ENGINE ==================
+
+def ask_question(i, item):
+    print(f"\nQ{i}. {fill(item['q'], width=90)}")
+    for ch in item["choices"]:
+        print(ch)
+    while True:
+        user = input("Your answer (A/B/C/D): ").strip().upper()
+        if user in ["A","B","C","D"]:
+            break
+        print("Please enter A, B, C, or D.")
+    correct = (user == item["answer"])
+    if correct:
+        print(" Correct!")
+    else:
+        print(f" Incorrect. Correct answer: {item['answer']}")
+    print("Note:", fill(item["explain"], width=90))
+    return 1 if correct else 0
+
+def run_quiz(categories):
+    # categories: list of subject names to include
+    pool = []
+    for cat in categories:
+        pool.extend(QUESTION_BANK[cat])
+    random.shuffle(pool)
+    score = 0
+    print("="*80)
+    title = " & ".join(categories) if len(categories) <= 2 else f"{len(categories)} Subjects"
+    print(f" QUIZ START — {title} — {len(pool)} questions")
+    print("="*80)
+    for i, q in enumerate(pool, start=1):
+        score += ask_question(i, q)
+    print("\n" + "-"*80)
+    percent = round(100*score/len(pool), 1)
+    print(f"Final Score: {score}/{len(pool)}  ({percent}%)")
+    if len(pool) == 100:
+        # Game rule: if score <= 30, auto retry
+        if score <= 30:
+            print(" Score is 30 or below. Let's train more! Restarting the 100-question game...\n")
+            return "retry"
+        else:
+            print(" Nice work! You beat the 30-point threshold for the full game.")
+    else:
+        print(" Good effort! Try to improve your score next round.")
+    return "done"
+
+def choose_categories():
+    print("\nChoose a subject:")
+    print("  1) Chemistry")
+    print("  2) Physics")
+    print("  3) Math")
+    print("  4) English")
+    print("  5) SAT")
+    print("  6) All (100 questions)")
+    while True:
+        choice = input("Enter 1-6: ").strip()
+        if choice in list("123456"):
+            choice = int(choice)
+            break
+        print("Please enter a number from 1 to 6.")
+    if choice == 1:
+        return ["Chemistry"]
+    if choice == 2:
+        return ["Physics"]
+    if choice == 3:
+        return ["Math"]
+    if choice == 4:
+        return ["English"]
+    if choice == 5:
+        return ["SAT"]
+    return ["Chemistry","Physics","Math","English","SAT"]
+
+def main():
+    print("="*80)
+    print(" welcome to panda QUIZ (100 question across 5 subjects)")
+    # panda is our group name
+    print("Choose one subject or play ALL 100 as a game.")
+    print("Game rule: In ALL mode, if your score is 30 or less, the game restarts.")
+    print("="*80)
+    while True:
+        cats = choose_categories()
+        result = run_quiz(cats)
+        if result == "retry":
+            # Automatically restart ALL mode
+            continue
+        again = input("\nPlay again? (y/n): ").strip().lower()
+        if again != 'y':
+            print(" Thanks for playing! Keep practicing and come back soon.")
+            break
+
+if __name__ == "__main__":
+    main()
