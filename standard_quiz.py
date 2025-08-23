@@ -27,3 +27,27 @@ CHEMISTRY = [
     {"q":"Which compound is ionic?", "choices":["A) CO2","B) H2O","C) NaCl","D) NH3"], "answer":"C","explain":"Metal + nonmetal → ionic, e.g., NaCl."},
 ]
 #this part is done by kira
+
+#develop by nejat
+PHYSICS = [
+    {"q":"SI unit of force is:", "choices":["A) Joule","B) Pascal","C) Newton","D) Watt"], "answer":"C","explain":"Force unit is Newton (kg·m/s^2)."},
+    {"q":"Speed with direction is called:", "choices":["A) Acceleration","B) Velocity","C) Displacement","D) Momentum"], "answer":"B","explain":"Velocity is a vector."},
+    {"q":"Which law states F = ma?", "choices":["A) Newton’s 1st","B) Newton’s 2nd","C) Newton’s 3rd","D) Hooke’s law"], "answer":"B","explain":"Second law links force, mass, acceleration."},
+    {"q":"Work is defined as:", "choices":["A) F/d","B) F×d (along displacement)","C) m×g","D) P×t"], "answer":"B","explain":"W = F·d·cosθ."},
+    {"q":"Kinetic energy formula:", "choices":["A) mgh","B) 1/2 mv^2","C) qV","D) PΔV"], "answer":"B","explain":"Translational KE = 1/2 mv^2."},
+    {"q":"Which wave needs a medium?", "choices":["A) Light","B) Radio","C) Sound","D) X-ray"], "answer":"C","explain":"Sound is mechanical; needs a medium."},
+    {"q":"Ohm’s law is:", "choices":["A) P=IV","B) V=IR","C) Q=It","D) E=mc^2"], "answer":"B","explain":"Voltage = current × resistance."},
+    {"q":"Unit of power:", "choices":["A) Joule","B) Watt","C) Newton","D) Coulomb"], "answer":"B","explain":"Power unit is Watt (J/s)."},
+    {"q":"Refraction occurs when light:", "choices":["A) Changes medium","B) Reflects off mirror","C) Diffracts around edges","D) Interferes"], "answer":"A","explain":"Refraction is bending due to speed change."},
+    {"q":"Density is mass per:", "choices":["A) Force","B) Volume","C) Area","D) Time"], "answer":"B","explain":"ρ = m/V."},
+    {"q":"Momentum is:", "choices":["A) m/a","B) mv","C) ma^2","D) m/v"], "answer":"B","explain":"Linear momentum p = mv."},
+    {"q":"Gravitational acceleration near Earth:", "choices":["A) 3.0 m/s^2","B) 9.8 m/s^2","C) 15 m/s^2","D) 1.6 m/s^2"], "answer":"B","explain":"g ≈ 9.8 m/s^2."},
+    {"q":"Unit of frequency:", "choices":["A) Hertz","B) Tesla","C) Volt","D) Weber"], "answer":"A","explain":"1 Hz = 1/s."},
+    {"q":"Coulomb’s law involves:", "choices":["A) Masses","B) Charges","C) Temperatures","D) Pressures"], "answer":"B","explain":"Electrostatic force between charges."},
+    {"q":"Lens that converges light:", "choices":["A) Concave","B) Convex","C) Planar","D) Cylindrical"], "answer":"B","explain":"Convex (converging) lens."},
+    {"q":"Thermodynamic temperature unit:", "choices":["A) °C","B) °F","C) K","D) R"], "answer":"C","explain":"Kelvin is SI base unit."},
+    {"q":"In SHM, restoring force is proportional to:", "choices":["A) Velocity","B) Displacement","C) Acceleration","D) Time"], "answer":"B","explain":"F = -kx."},
+    {"q":"Unit of electric charge:", "choices":["A) Ampere","B) Coulomb","C) Ohm","D) Farad"], "answer":"B","explain":"Charge is measured in coulombs."},
+    {"q":"Transformer works on:", "choices":["A) DC","B) AC","C) Both","D) Neither"], "answer":"B","explain":"Transformers require changing magnetic flux (AC)."},
+    {"q":"The slope of a velocity–time graph gives:", "choices":["A) Velocity","B) Displacement","C) Acceleration","D) Jerk"], "answer":"C","explain":"dv/dt = acceleration."},
+]
